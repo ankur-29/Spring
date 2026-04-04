@@ -1,0 +1,69 @@
+1. What is Spring Framework?
+====================================================
+Spring is a Java framework used to build:
+ - Enterprise applications
+ - Web applications
+ - Microservices
+It helps us write loosely coupled, scalable, maintainable code
+
+2. What is Spring Boot?
+====================================================
+Spring Boot = Spring + Auto Configuration + Production Ready Setup
+
+It removes:
+ - XML configuration
+ - Manual setup
+ - Boilerplate code
+
+3. Core Concept: IoC (Inversion of Control)
+====================================================
+Without Spring:
+----------------------------------------------------
+We create objects manually
+ - Car car = new Car();
+
+With Spring:
+----------------------------------------------------
+Spring creates and manages objects for you --> This is called IoC (Inversion of Control)
+
+4. Dependency Injection (DI)
+====================================================
+Instead of creating dependencies inside a class, we inject them from outside
+
+❌ Tight Coupling
+class Car {
+    Engine engine = new Engine(); // BAD
+}
+✅ Loose Coupling (DI)
+class Car {
+    Engine engine;
+
+    Car(Engine engine) {
+        this.engine = engine;
+    }
+}
+
+👉 Spring automatically injects Engine into Car
+
+5. What is a Bean?
+====================================================
+Any object managed by Spring is Bean
+
+Example:
+
+@Component
+class Engine {
+}
+
+Spring creates: Engine object → Bean
+
+6. Spring Container
+====================================================
+Responsible for:
+ - Creating objects (Beans)
+ - Injecting dependencies
+ - Managing lifecycle
+
+Two types:
+ - BeanFactory (basic)
+ - ApplicationContext (advanced, used in real apps)
