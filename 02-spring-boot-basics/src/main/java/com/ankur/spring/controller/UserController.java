@@ -17,6 +17,11 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/users")
+    public ResponseEntity<?> getUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
+
     @PostMapping("/users")
     public ResponseEntity<?> addUser(@RequestBody UserRequestDTO userDTO) {
 
@@ -31,9 +36,7 @@ public class UserController {
         if (userDTO.getAge() < 18) {
             return ResponseEntity.badRequest().body("User must be at least 18 years old");
         }
-
         UserResponseDTO response = userService.createUser(userDTO);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

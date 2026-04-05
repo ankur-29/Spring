@@ -1,7 +1,9 @@
 package com.ankur.spring.service;
 
 import org.springframework.stereotype.Service;
+import java.util.List;
 
+import com.ankur.spring.repository.UserRepository;
 import com.ankur.spring.dto.UserRequestDTO;
 import com.ankur.spring.dto.UserResponseDTO;
 import com.ankur.spring.model.User;
@@ -9,16 +11,26 @@ import com.ankur.spring.model.User;
 @Service
 public class UserService {
 
-    public UserResponseDTO createUser(UserRequestDTO userDTO) {
+    private final UserRepository userRepository;
+    
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
+    public UserResponseDTO createUser(UserRequestDTO userDTO) {
         // Convert DTO → Entity
         User user = new User();
         user.setName(userDTO.getName());
         user.setAge(userDTO.getAge());
-
-        // (Later: Save to DB)
+        
+        // Save to DB
+        User savedUser = userRepository.save(user);
 
         // Convert Entity → Response DTO
-        return new UserResponseDTO(user.getName());
+        return new UserResponseDTO(savedUser.getName());
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }
