@@ -57,7 +57,15 @@ class Engine {
 
 Spring creates: Engine object → Bean
 
-6. Spring Container
+6. Bean lifecycle
+====================================================
+ - Object Created (Constructor called)
+ - Dependencies Injected
+ - @PostConstruct runs
+ - Bean is ready to use
+ - @PreDestroy runs (on shutdown)
+
+7. Spring Container
 ====================================================
 Responsible for:
  - Creating objects (Beans)
@@ -67,3 +75,25 @@ Responsible for:
 Two types:
  - BeanFactory (basic)
  - ApplicationContext (advanced, used in real apps)
+
+
+8. Explain why constructor injection is preferred over field injection ?
+=========================================================================
+Constructor injection is preferred because it ensures mandatory dependencies, 
+supports immutability, improves testability, avoids hidden dependencies, 
+and promotes better design principles compared to field injection.
+
+9. Differnce between @Primary and @ Qualifier ?
+=====================================================
+ - Both used when multiple beans of the same type exist
+ - @Primary provides a default bean when multiple beans of the same type exist, 
+   while @Qualifier is used to explicitly specify which bean should be injected.
+ - @Qualifier overrides @Primary.
+
+| Feature     | @Primary ⭐       | @Qualifier 🎯         |
+| ----------- | ----------------- | --------------------- |
+| Type        | Default selection | Explicit selection    |
+| Control     | Global            | Local (per injection) |
+| Usage       | On bean           | At injection point    |
+| Flexibility | Less              | More                  |
+| Priority    | Lower             | Higher                |
