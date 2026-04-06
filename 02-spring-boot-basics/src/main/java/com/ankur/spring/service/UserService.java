@@ -7,6 +7,7 @@ import com.ankur.spring.repository.UserRepository;
 import com.ankur.spring.dto.UserRequestDTO;
 import com.ankur.spring.dto.UserResponseDTO;
 import com.ankur.spring.model.User;
+import com.ankur.spring.exception.UserNotFoundException;
 
 @Service
 public class UserService {
@@ -32,5 +33,10 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    public User getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
     }
 }
