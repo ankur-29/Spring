@@ -1,8 +1,13 @@
 package com.ankur.spring.dto;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 public class UserRequestDTO {
 
+    @NotBlank(message = "Name cannot be blank")
     private String name;
+    @Min(value = 18, message = "Age must be at least 18")
     private int age;
 
     // Getters & Setters

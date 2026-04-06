@@ -8,6 +8,8 @@ import com.ankur.spring.dto.UserRequestDTO;
 import com.ankur.spring.dto.UserResponseDTO;
 import com.ankur.spring.service.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class UserController {
 
@@ -28,19 +30,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<?> addUser(@RequestBody UserRequestDTO userDTO) {
-
-        if (userDTO == null) {
-            return ResponseEntity.badRequest().body("User cannot be null");
-        }
-
-        if (userDTO.getName() == null || userDTO.getName().trim().isEmpty()) {
-            return ResponseEntity.badRequest().body("User name cannot be empty");
-        }
-
-        if (userDTO.getAge() < 18) {
-            return ResponseEntity.badRequest().body("User must be at least 18 years old");
-        }
+    public ResponseEntity<?> addUser(@Valid @RequestBody UserRequestDTO userDTO) {
         UserResponseDTO response = userService.createUser(userDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
